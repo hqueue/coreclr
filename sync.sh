@@ -2,7 +2,7 @@
 
 usage()
 {
-    echo "Usage: sync [-p]"
+    echo "Usage: sync [-p] "
     echo "Repository syncing script."
     echo "  -p         Restore all NuGet packages for the repository"
     echo "If no option is specified, then \"sync.sh -p\" is implied."
