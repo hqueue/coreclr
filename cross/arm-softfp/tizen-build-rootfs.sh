@@ -51,6 +51,13 @@ download_files()
     $TIZEN_DOWNLOAD_CMD http://download.tizen.org/releases/weekly/tizen/3.0-mobile/tizen-3.0-mobile_20161223.1/repos/arm-wayland/packages/armv7l/libunwind-1.1-1.1.armv7l.rpm
     $TIZEN_DOWNLOAD_CMD http://download.tizen.org/releases/weekly/tizen/3.0-mobile/tizen-3.0-mobile_20161223.1/repos/arm-wayland/packages/armv7l/libunwind-devel-1.1-1.1.armv7l.rpm
     $TIZEN_DOWNLOAD_CMD http://download.tizen.org/releases/weekly/tizen/3.0-mobile/tizen-3.0-mobile_20161223.1/repos/arm-wayland/packages/armv7l/tizen-release-3.0.0-1.7.armv7l.rpm
+    # 3. for corefx
+    $TIZEN_DOWNLOAD_CMD http://download.tizen.org/releases/weekly/tizen/3.0-base/tizen-3.0-base_20161223.2/repos/arm/packages/armv7l/libcom_err-1.42.13-2.1.armv7l.rpm
+    $TIZEN_DOWNLOAD_CMD http://download.tizen.org/releases/weekly/tizen/3.0-base/tizen-3.0-base_20161223.2/repos/arm/packages/armv7l/libcom_err-devel-1.42.13-2.1.armv7l.rpm
+    $TIZEN_DOWNLOAD_CMD http://download.tizen.org/releases/weekly/tizen/3.0-mobile/tizen-3.0-mobile_20161223.1/repos/arm-wayland/packages/armv7l/gssdp-0.14.4-1.1.armv7l.rpm
+    $TIZEN_DOWNLOAD_CMD http://download.tizen.org/releases/weekly/tizen/3.0-mobile/tizen-3.0-mobile_20161223.1/repos/arm-wayland/packages/armv7l/gssdp-devel-0.14.4-1.1.armv7l.rpm
+    $TIZEN_DOWNLOAD_CMD http://download.tizen.org/releases/weekly/tizen/3.0-mobile/tizen-3.0-mobile_20161223.1/repos/arm-wayland/packages/armv7l/krb5-devel-1.10.2-3.1.armv7l.rpm
+    $TIZEN_DOWNLOAD_CMD http://download.tizen.org/releases/weekly/tizen/3.0-mobile/tizen-3.0-mobile_20161223.1/repos/arm-wayland/packages/armv7l/krb5-1.10.2-3.1.armv7l.rpm
 }
 
 # Download files
