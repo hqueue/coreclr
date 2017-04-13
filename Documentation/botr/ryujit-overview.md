@@ -191,27 +191,28 @@ This expands most `GT_QMARK`/`GT_COLON` trees into blocks, except for the case t
 
 At this point, a number of analyses and transformations are done on the flowgraph:
 
-* Computing the predecessors of each block
-* Computing edge weights, if profile information is available
-* Computing reachability and dominators
-* Identifying and normalizing loops (transforming while loops to “do while”)
-* Cloning and unrolling of loops
+* Computing the predecessors of each block (`fgComputePreds()`)
+* Computing edge weights, if profile information is available (`fgComputeEdgeWeights()`)
+* Optimize the BasicBlock layout of the method (`optOptimizeLayout()`)
+* Computing reachability and dominators (`fgComputeReachability()`)
+* Identifying and normalizing loops (transforming while loops to “do while”) (`optOptimizeLoops()`)
+* Cloning and unrolling of loops (`optCloneLoops()`, `optUnrollLoops()`)
 
 ## <a name="normalize-ir"/>Normalize IR for Optimization
 
 At this point, a number of properties are computed on the IR, and must remain valid for the remaining phases. We will call this “normalization”
 
-* `lvaMarkLocalVars` – set the reference counts (raw and weighted) for lvlVars, sort them, and determine which will be tracked (currently up to 128). Note that after this point any transformation that adds or removes lvlVar references must update the reference counts.
-* `optOptimizeBools` – this optimizes Boolean expressions, and may change the flowgraph (why is it not done prior to reachability and dominators?)
+* `lvaMarkLocalVars()` – set the reference counts (raw and weighted) for lvlVars, sort them, and determine which will be tracked (currently up to 128). Also add new copies for assertion propagation if assertion propagation is enabled (`optAddCopies()`). Note that after this point any transformation that adds or removes lvlVar references must update the reference counts.
+* `optOptimizeBools()` – this optimizes Boolean expressions, and may change the flowgraph (why is it not done prior to reachability and dominators?)
 * Link the trees in evaluation order (setting `gtNext` and `gtPrev` fields): and `fgFindOperOrder()` and `fgSetBlockOrder()`.
 
 ## <a name="ssa-vn"/>SSA and Value Numbering Optimizations
 
-The next set of optimizations are built on top of SSA and value numbering. First, the SSA representation is built (during which dataflow analysis, aka liveness, is computed on the lclVars), then value numbering is done using SSA.
+The next set of optimizations are built on top of SSA and value numbering. First, the SSA representation is built (during which dataflow analysis, aka liveness, is computed on the lclVars and stored in `bbLiveIn` and `bbLiveOut` of BasicBlock), then value numbering is done using SSA.
 
 ### <a name="licm"/>Loop Invariant Code Hoisting
 
-This phase traverses all the loop nests, in outer-to-inner order (thus hoisting expressions outside the largest loop in which they are invariant). It traverses all of the statements in the blocks in the loop that are always executed. If the statement is:
+This phase (`optHoistLoopCode()`) traverses all the loop nests, in outer-to-inner order (thus hoisting expressions outside the largest loop in which they are invariant). It traverses all of the statements in the blocks in the loop that are always executed. If the statement is:
 
 * A valid CSE candidate
 * Has no side-effects
@@ -230,7 +231,7 @@ Utilizes value numbers to identify redundant computations, which are then evalua
 
 ### <a name="assertion-propagation"/>Assertion Propagation
 
-Utilizes value numbers to propagate and transform based on properties such as non-nullness.
+`optAssertionPropMain()` utilizes value numbers to propagate and transform based on properties such as non-nullness.
 
 ### <a name="range-analysis"/>Range analysis
 
@@ -360,12 +361,12 @@ The “@ 15” is the location number of the node.  The “0=1” indicates that
 
 The RyuJIT register allocator uses a Linear Scan algorithm, with an approach similar to [[2]](#[2]). In brief, it operates on two main data structures:
 
-* `Intervals` (representing live ranges of variables or tree expressions) and `RegRecords` (representing physical registers), both of which derive from `Referent`.
+* `Intervals` (representing live ranges of variables or tree expressions) and `RegRecords` (representing physical registers), both of which derive from `Referenceable`.
 * `RefPositions`, which represent uses or defs (or variants thereof, such as ExposedUses) of either `Intervals` or physical registers.
 
 Pre-conditions:
 
-* The `NodeInfo` is initialized for each tree node to indicate:
+* The `TreeNodeInfo` is initialized for each tree node to indicate:
   * Number of registers consumed and produced by the node.
   * Number and type (int versus float) of internal registers required.
 
