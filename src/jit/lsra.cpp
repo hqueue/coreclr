@@ -6219,7 +6219,11 @@ void LinearScan::unassignPhysRegNoSpill(RegRecord* regRec)
 void LinearScan::checkAndClearInterval(RegRecord* regRec, RefPosition* spillRefPosition)
 {
     Interval* assignedInterval = regRec->assignedInterval;
+#ifdef _TARGET_ARM_
+    NYI_IF(assignedInterval == nullptr, "LSRA support for ARM FP registers");
+#else
     assert(assignedInterval != nullptr);
+#endif
     regNumber thisRegNum = regRec->regNum;
 
     if (spillRefPosition == nullptr)
