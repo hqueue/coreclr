@@ -6418,11 +6418,6 @@ void LinearScan::unassignPhysReg(RegRecord* regRec, RefPosition* spillRefPositio
 
             nextRegRec->assignedInterval = nextRegRec->previousInterval;
             nextRegRec->previousInterval = nullptr;
-
-            // TODO-ARM-Throughput: For ARM, we can reuse regRec->previousInterval,
-            // if following assertion is always true.
-            // Please take a look at tryAllocateFreeReg().
-            assert(nextRegRec->assignedInterval == regRec->assignedInterval);
         }
 #endif // _TARGET_ARM_
 
