@@ -204,49 +204,49 @@ const char* getRegNameFloat(regNumber reg, var_types type)
                 regName = "d0";
                 break;
             case REG_F2:
-                regName = "d2";
+                regName = "d1";
                 break;
             case REG_F4:
-                regName = "d4";
+                regName = "d2";
                 break;
             case REG_F6:
-                regName = "d6";
+                regName = "d3";
                 break;
             case REG_F8:
-                regName = "d8";
+                regName = "d4";
                 break;
             case REG_F10:
-                regName = "d10";
+                regName = "d5";
                 break;
             case REG_F12:
-                regName = "d12";
+                regName = "d6";
                 break;
             case REG_F14:
-                regName = "d14";
+                regName = "d7";
                 break;
             case REG_F16:
-                regName = "d16";
+                regName = "d8";
                 break;
             case REG_F18:
-                regName = "d18";
+                regName = "d9";
                 break;
             case REG_F20:
-                regName = "d20";
+                regName = "d10";
                 break;
             case REG_F22:
-                regName = "d22";
+                regName = "d11";
                 break;
             case REG_F24:
-                regName = "d24";
+                regName = "d12";
                 break;
             case REG_F26:
-                regName = "d26";
+                regName = "d13";
                 break;
             case REG_F28:
-                regName = "d28";
+                regName = "d14";
                 break;
             case REG_F30:
-                regName = "d30";
+                regName = "d15";
                 break;
         }
         return regName;
