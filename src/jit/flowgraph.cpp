@@ -21699,6 +21699,9 @@ unsigned Compiler::fgCheckInlineDepthAndRecursion(InlineInfo* inlineInfo)
 
 void Compiler::fgInline()
 {
+    // XXX: Always disable inliing
+    return;
+
     if (!opts.OptEnabled(CLFLG_INLINING))
     {
         return;

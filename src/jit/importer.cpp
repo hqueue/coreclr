@@ -18362,6 +18362,9 @@ void Compiler::impMarkInlineCandidate(GenTreePtr             callNode,
     // Let the strategy know there's another call
     impInlineRoot()->m_inlineStrategy->NoteCall();
 
+    // XXX : Always disable inlining even when INLINING is forced
+    return;
+
     if (!opts.OptEnabled(CLFLG_INLINING))
     {
         /* XXX Mon 8/18/2008

@@ -779,7 +779,7 @@ private:
 
 #define CLFLG_MAXOPT                                                                                                   \
     (CLFLG_CSE | CLFLG_REGVAR | CLFLG_RNGCHKOPT | CLFLG_DEADASGN | CLFLG_CODEMOTION | CLFLG_QMARK | CLFLG_TREETRANS |  \
-     CLFLG_INLINING | CLFLG_STRUCTPROMOTE | CLFLG_CONSTANTFOLD)
+     CLFLG_STRUCTPROMOTE | CLFLG_CONSTANTFOLD)
 
 #define CLFLG_MINOPT (CLFLG_TREETRANS)
 
