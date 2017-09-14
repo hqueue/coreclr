@@ -3660,7 +3660,7 @@ GenTree* Lowering::LowerVirtualStubCall(GenTreeCall* call)
 
     GenTree* result = nullptr;
 
-#ifdef _TARGET_64BIT_
+//#ifdef _TARGET_64BIT_ // XXX
     // Non-tail calls: Jump Stubs are not taken into account by VM for mapping an AV into a NullRef
     // exception. Therefore, JIT needs to emit an explicit null check.  Note that Jit64 too generates
     // an explicit null check.
@@ -3674,9 +3674,12 @@ GenTree* Lowering::LowerVirtualStubCall(GenTreeCall* call)
 
     if (!call->IsTailCallViaHelper())
     {
+        JITDUMP("XXX GTF_CALL_NULLCHECK for VSD:");
+        DISPNODE(call);
+        JITDUMP("\n");
         call->gtFlags |= GTF_CALL_NULLCHECK;
     }
-#endif
+//#endif
 
     // This is code to set up an indirect call to a stub address computed
     // via dictionary lookup.

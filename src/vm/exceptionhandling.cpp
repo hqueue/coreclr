@@ -22,7 +22,7 @@
 #endif // _TARGET_X86_
 
 #if defined(_TARGET_ARM_) || defined(_TARGET_X86_)
-#define VSD_STUB_CAN_THROW_AV
+//#define VSD_STUB_CAN_THROW_AV
 #endif // _TARGET_ARM_ || _TARGET_X86_
 
 #if defined(_TARGET_ARM_) || defined(_TARGET_ARM64_)
