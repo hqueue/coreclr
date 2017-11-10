@@ -8,8 +8,11 @@ rootpw tizen
 desktop --autologinuser=root
 user --name root  --groups audio,video --password 'tizen'
 
-repo --name=standard  --baseurl=http://download.tizen.org/releases/daily/tizen/4.0-unified/latest/repos/standard/packages/ --ssl_verify=no
-repo --name=base      --baseurl=http://download.tizen.org/releases/daily/tizen/4.0-base/latest/repos/arm/packages/ --ssl_verify=no
+### Tizen 4.0 Public M2
+### https://developer.tizen.org/tizen/release-notes/tizen-4.0-public-m2
+### https://source.tizen.org/release/tizen-4.0-m2
+repo --name=unified-standard --baseurl=http://download.tizen.org/releases/milestone/tizen/4.0-unified/tizen-4.0-unified_20171027.1/repos/standard/packages/ --ssl_verify=no
+repo --name=base_arm         --baseurl=http://download.tizen.org/releases/milestone/tizen/4.0-base/tizen-4.0-base_20170929.1/repos/arm/packages/ --ssl_verify=no
 
 %packages
 tar

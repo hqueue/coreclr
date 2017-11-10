@@ -51,7 +51,6 @@ if [ ! -d $TMPDIR ]; then
 	mkdir -p $TMPDIR 
 fi
 
-TIZEN_URL=http://download.tizen.org/releases/daily/tizen
 BUILD_XML=build.xml
 REPOMD_XML=repomd.xml
 PRIMARY_XML=primary.xml
@@ -81,7 +80,20 @@ fetch_tizen_pkgs_init()
 	if [ -d $TMP_PKG_DIR ]; then rm -rf $TMP_PKG_DIR; fi
 	mkdir -p $TMP_PKG_DIR
 
-	PKG_URL=$TIZEN_URL/$PROFILE/latest
+        # Tizen 4.0 Public M2
+        # https://developer.tizen.org/tizen/release-notes/tizen-4.0-public-m2
+        # https://source.tizen.org/release/tizen-4.0-m2
+        TIZEN_URL=http://download.tizen.org/releases/milestone/tizen
+        if [[ "$PROFILE" == "4.0-base" ]]; then
+            REPO_IDENTIFIER=tizen-4.0-base_20170929.1
+        elif [[ "$PROFILE" == "4.0-unified" ]]; then
+            REPO_IDENTIFIER=tizen-4.0-unified_20171027.1
+        else
+            Error "Unknown profile: $PROFILE"
+            Debug "TARGET: $TARGET, PROFILE: $PROFILE"
+            exit 1
+        fi
+	PKG_URL=$TIZEN_URL/$PROFILE/$REPO_IDENTIFIER
 
 	BUILD_XML_URL=$PKG_URL/$BUILD_XML
 	TMP_BUILD=$TMP_PKG_DIR/$BUILD_XML
